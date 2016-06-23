@@ -1,0 +1,39 @@
+{% extends "basehead.html" %}
+{% block content %}
+<center>
+<br>
+</br>
+<table>
+<th> </th>
+<th>Asset Tag</th>
+<th>Horsepower</th>
+<th>Voltage</th>
+<th>RPM</th>
+<th>Frame</th>
+<th>Enclosure</th>
+<th>Secondary Voltage</th>
+<th>Attachments</th>
+<th>Date Created</th>
+{% for asset in assets %}
+    <tr>
+        <td>
+        <form action="{{ url_for('assets.delasset') }}" method="post">
+        <input type="hidden" name="delete" value="{{ asset.asset_tag }}"/>
+        <input type="submit" class="btn btn-xs btn-danger" value="Delete"/>
+        </form>
+        </td>
+        <td>{{ asset.asset_tag }}</td>
+        <td>{{ asset.horsepower }}</td>
+        <td>{{ asset.voltage }}</td>
+        <td>{{ asset.rpm }}</td>
+        <td>{{ asset.frame }}</td>
+        <td>{{ asset.enclosure }}</td>
+        <td>{{ asset.secondary_voltage }}</td>
+        <td>{{ asset.attachments }}</td>
+        <td>{{ asset.pub_date }}</td>
+    </tr>
+{% endfor %}
+</table>
+</center>
+
+{% endblock %}

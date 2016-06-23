@@ -1,0 +1,24 @@
+{% extends "basehead.html" %}
+{% block content %}
+  <center>
+    <div class="container">
+      <h2>Login Below</h2>
+      <br>
+      <form action="" method="post" name="submit">
+      {{ form.hidden_tag() }}
+     <p>
+        {{ form.login_email(placeholder=" Email Address") }}
+     </p>
+     <p>
+         {{ form.login_password(placeholder=" Password") }}
+     </p>
+        <input class="btn btn-default" type="submit" value="Submit">
+      </form>
+      {% if result_message %}
+      <br>
+        <p class="result_message"> {{ result_message }} </p>
+      </br>
+      {% endif %}
+    </div>
+    </center>
+{% endblock %}

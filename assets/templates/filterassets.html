@@ -1,0 +1,68 @@
+{% extends "basehead.html" %}
+{% block content %}
+<center>
+ <div class="container">
+      <h2>Filter Assets By Attributes Below</h2>
+      <br>
+      <form action="" method="post" name="submit">
+      {{ form.hidden_tag() }}
+     <p>
+        {{ form.horsepower_search(placeholder=" Enter Horsepower") }}
+     </p>
+     <p>
+        {{ form.voltage_search(placeholder=" Enter Voltage") }}
+     </p>
+     <p>
+        {{ form.rpm_search(placeholder=" Enter RPM") }}
+     </p>
+     <p>
+        {{ form.frame_search(placeholder=" Enter Frame Type") }}
+     </p>
+     <p>
+        {{ form.enclosure_search(placeholder=" Enter Enclosure Type") }}
+     </p>
+     <p>
+        {{ form.secondary_voltage_search(placeholder=" Enter Secondary Voltage") }}
+     </p>
+     <p>
+        {{ form.attachments_search(placeholder=" Enter Attachments") }}
+     </p>
+        <input class="btn btn-default" type="submit" value="Search">
+      </form>
+<br>
+<table>
+<th> </th>
+{% if results %}
+<th>Asset Tag</th>
+<th>Horsepower</th>
+<th>Voltage</th>
+<th>RPM</th>
+<th>Frame</th>
+<th>Enclosure</th>
+<th>Secondary Voltage</th>
+<th>Attachments</th>
+<th>Date Created</th>
+{% endif %}
+{% for result in results %}
+    <tr>
+        <td>
+        <form action="{{ url_for('delasset') }}" method="post">
+        <input type="hidden" name="delete" value="{{ result.asset_tag }}"/>
+        <input type="submit" class="btn btn-xs btn-danger" value="Delete"/>
+        </form>
+        </td>
+        <td>{{ result.asset_tag }}</td>
+        <td>{{ result.horsepower }}</td>
+        <td>{{ result.voltage }}</td>
+        <td>{{ result.rpm }}</td>
+        <td>{{ result.frame }}</td>
+        <td>{{ result.enclosure }}</td>
+        <td>{{ result.secondary_voltage }}</td>
+        <td>{{ result.attachments }}</td>
+        <td>{{ result.pub_date }}</td>
+{% endfor %}
+    </tr>
+</table>
+</center>
+
+{% endblock %}

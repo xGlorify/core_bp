@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Core Systems - Alpha Release 2016</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+
+    <div class="container">
+    <br>
+    <center>
+    <form action="{{ url_for('search') }}" method="post" name="submit">
+    <a href="{{ url_for('submitasset') }}">Submit Asset Page</a>
+    |
+    <a href="{{ url_for('viewassets') }}">View Assets Page</a>
+    |
+    <a href="{{ url_for('searchassets') }}">Filter Assets Page</a>
+    |
+      {{ g.headersearchform.hidden_tag() }}
+        {{ g.headersearchform.asset_tag_search(placeholder=" Enter Asset Tag") }}
+        <input class="btn btn-default" type="submit" value="Search">
+    |
+    {{ g.current_user.first_name}}  {{ g.current_user.last_name }}
+    {% if g.current_user.first_name %}
+    |
+    <a href="{{ url_for('logout') }}">Logout</a>
+    {% endif %}
+    </form>
+     
+    </center>
+      <!-- child template -->
+      {% block content %}
+      {% endblock %}
+     <br>
+    </div>
+    <div class="container">
+    <center>
+      {% for message in get_flashed_messages() %}
+          {{ message }}
+      {% endfor %}
+    </center>
+    </div>
+  </body>
+</html>

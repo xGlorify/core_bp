@@ -1,0 +1,45 @@
+{% extends "basehead.html" %}
+{% block content %}
+  <center>
+    <div class="container">
+      <h2>Submit Asset Attributes Below</h2>
+      <br>
+      <form action="" method="post" name="submit">
+      {{ form.hidden_tag() }}
+      <p>
+        {{ form.asset_tag(placeholder=" Enter Asset Tag") }}
+     </p>
+     <p>
+         {{ form.horsepower(placeholder=" Enter Horsepower") }}
+     </p>
+      <p>
+         {{ form.voltage(placeholder=" Enter Voltage") }}
+     </p>
+      <p>
+         {{ form.rpm(placeholder=" Enter RPM") }}
+     </p>
+      <p>
+         {{ form.frame(placeholder=" Enter Frame") }}
+     </p>
+      <p>
+         {{ form.enclosure(placeholder=" Enter Enclosure") }}
+     </p>
+      <p>
+         {{ form.secondary_voltage(placeholder=" Enter Secondary Voltage") }}
+     </p>
+      <p>
+         {{ form.attachments(placeholder=" Enter Attachments") }}
+     </p>
+        <input class="btn btn-default" type="submit" value="Submit">
+      </form>
+      {% if result_message %}
+      <br>
+        <p class="result_message"> {{ result_message }} </p>
+      </br>
+      {% endif %}
+    </div>
+    </center>
+{% endblock %}
+    
+
+
