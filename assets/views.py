@@ -5,7 +5,7 @@ from forms import SubmitAssetForm, FilterAssetsForm
 from flask.ext.login import login_required
 from models import *
 
-assets_blueprint = Blueprint('assets', __name__, template_folder = 'templates')
+assets_blueprint = Blueprint('assets', __name__, template_folder = 'templates', static_folder='./static')
 
 @assets_blueprint.route('/submitasset', methods=['GET', 'POST'])
 @login_required
@@ -96,3 +96,5 @@ def search():
         else:
             flash("You must enter a value to search.")
     return render_template('searchresults.html')
+
+#@assets_blueprint.route('

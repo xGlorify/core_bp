@@ -16,7 +16,7 @@ from users.views import users_blueprint
 from assets.views import assets_blueprint
 
 app.register_blueprint(users_blueprint)
-app.register_blueprint(assets_blueprint)
+app.register_blueprint(assets_blueprint,  url_prefix = '/assets')
 
 #db.drop_all()
 #db.create_all()
@@ -31,6 +31,8 @@ def load_user(user_id):
 def before_request():
     g.headersearchform = SearchAssetTag()
     g.current_user = current_user
+    
+login_manager.login_view = "users.login"
 
 from users.models import User
 
