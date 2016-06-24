@@ -1,4 +1,4 @@
-from flask import render_template, request, session, url_for, redirect, flash, Blueprint
+from flask import render_template, request, session, url_for, redirect, flash, Blueprint, g
 from core import app, db
 from sqlalchemy.exc import IntegrityError
 from forms import SubmitAssetForm, FilterAssetsForm
@@ -16,15 +16,22 @@ def submitasset():
         if form.validate_on_submit():# Confirms if all requirements for the form are met (No empty fields in this case).
             try:
                 asset_input = form.asset_tag.data #Form input for Asset Tag.
-                horsepower_input = form.horsepower.data #Form input for Horsepower of corresponding asset.
+                manufacturer_input = form.manufacturer.data
+                model_number_input = form.model_number.data
+                current_input = form.current.data
+                frequency_input = form.frequency.data
                 voltage_input = form.voltage.data #Form input for voltage of corresponding asset.
+                secondary_voltage_input = form.secondary_voltage.data #Form input for secondary voltage of corresponding asset.
+                power_factor_input = form.power_factor.data
+                efficiency_input = form.efficiency.data
+                horsepower_input = form.horsepower.data #Form input for Horsepower of corresponding asset.
                 rpm_input = form.rpm.data #Form input for RPM of corresponding asset.
+                design_input = form.design.data
                 frame_input = form.frame.data #Form input for Frame of corresponding asset.
                 enclosure_input = form.enclosure.data #Form input for enclosure of corresponding asset.
-                secondary_voltage_input = form.secondary_voltage.data #Form input for secondary voltage of corresponding asset.
                 attachments_input = form.attachments.data #Form input for any attachments of corresponding asset.
-                pass_to_db = Motor(asset_input, horsepower_input, voltage_input, rpm_input, #Convert form data to Motor model.
-                frame_input, enclosure_input, secondary_voltage_input, attachments_input)  #Convert form data to Motor model.
+                pass_to_db = Motor(asset_input, manufacturer_input, model_number_input, current_input, frequency_input, voltage_input, secondary_voltage_input, 
+                power_factor_input, efficiency_input, horsepower_input, rpm_input, design_input, frame_input, enclosure_input, attachments_input) #Convert form data to Motor model.
                 db.session.add(pass_to_db) #Add form data in Motor model to database.
                 db.session.commit() #Commit additions to database.
                 result_message = str(asset_input) + " successfully added to the database."

@@ -3,15 +3,22 @@
 <center>
 <br>
 </br>
-<table>
-<th> </th>
+<table class="table table-striped table-bordered">
+<th>Action</th>
 <th>Asset Tag</th>
-<th>Horsepower</th>
+<th>Manufacturer</th>
+<th>Model Number</th>
+<th>Current</th>
+<th>Frequency</th>
 <th>Voltage</th>
+<th>Secondary Voltage</th>
+<th>Power Factor</th>
+<th>Efficiency</th>
+<th>Horsepower</th>
 <th>RPM</th>
+<th>Design</th>
 <th>Frame</th>
 <th>Enclosure</th>
-<th>Secondary Voltage</th>
 <th>Attachments</th>
 <th>Date Created</th>
 {% for asset in assets %}
@@ -23,12 +30,19 @@
         </form>
         </td>
         <td>{{ asset.asset_tag }}</td>
-        <td>{{ asset.horsepower }}</td>
+        <td>{{ asset.manufacturer }}</td>
+        <td>{{ asset.model_number }}</td>
+        <td>{{ asset.current }}</td>
+        <td>{{ asset.frequency }}</td>
         <td>{{ asset.voltage }}</td>
+        <td>{{ asset.secondary_voltage }}</td>
+        <td>{{ asset.power_factor }}</td>
+        <td>{{ asset.efficiency }}</td>
+        <td>{{ asset.horsepower }}</td>
         <td>{{ asset.rpm }}</td>
+        <td>{{ asset.design }}</td>
         <td>{{ asset.frame }}</td>
         <td>{{ asset.enclosure }}</td>
-        <td>{{ asset.secondary_voltage }}</td>
         <td>{{ asset.attachments }}</td>
         <td>{{ asset.pub_date }}</td>
     </tr>

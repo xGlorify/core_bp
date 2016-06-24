@@ -10,7 +10,7 @@
 <th>Horsepower</th>
     <tr>
         <td>
-        <form action="{{ url_for('delasset') }}" method="post">
+        <form action="{{ url_for('assets.delasset') }}" method="post">
         <input type="hidden" name="delete" value="{{ results.asset_tag }}"/>
         <input type="submit" class="btn btn-xs btn-danger" value="Delete"/>
         </form>

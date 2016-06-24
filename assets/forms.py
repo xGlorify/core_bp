@@ -4,12 +4,19 @@ from wtforms.validators import DataRequired, Optional
 
 class SubmitAssetForm(Form):
     asset_tag = StringField('asset_tag', validators=[DataRequired()])
-    horsepower = IntegerField('horsepower', validators=[DataRequired()])
+    manufacturer = StringField('manufacturer', validators=[DataRequired()])
+    model_number = IntegerField('model_number', validators=[DataRequired()])
+    current = IntegerField('current', validators=[DataRequired()])
+    frequency = IntegerField('frequency', validators=[DataRequired()])
     voltage = IntegerField('voltage', validators=[DataRequired()])
+    secondary_voltage = FloatField('secondary_voltage', validators=[Optional()])
+    power_factor = IntegerField('power_factor', validators=[DataRequired()])
+    efficiency = IntegerField('efficiency', validators=[DataRequired()])
+    horsepower = IntegerField('horsepower', validators=[DataRequired()])
     rpm = IntegerField('rpm', validators=[DataRequired()])
+    design = StringField('design', validators=[DataRequired()])
     frame = StringField('frame', validators=[DataRequired()])
     enclosure = StringField('enclosure', validators=[DataRequired()])
-    secondary_voltage = FloatField('secondary_voltage', validators=[Optional()])
     attachments = StringField('attachments', validators=[Optional()])
     
 class FilterAssetsForm(Form):
