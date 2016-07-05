@@ -20,12 +20,13 @@ class Motor(db.Model):
     frame = db.Column('Frame', db.String(30), nullable = False)
     enclosure = db.Column('Enclosure', db.String(30), nullable = False)
     attachments = db.Column('Attachments', db.String(30))
+    picture = db.Column('Picture', db.String(100))
     pub_date = db.Column(db.DateTime())
     
     
     
     def __init__(self, asset_tag, manufacturer, model_number, current, frequency, voltage, secondary_voltage,
-        power_factor, efficiency, horsepower, rpm, design, frame, enclosure, attachments, pub_date=None):
+        power_factor, efficiency, horsepower, rpm, design, frame, enclosure, attachments, picture, pub_date=None):
         self.asset_tag = asset_tag
         self.manufacturer = manufacturer
         self.model_number = model_number
@@ -41,4 +42,5 @@ class Motor(db.Model):
         self.frame = frame
         self.enclosure = enclosure
         self.attachments = attachments
+        self.picture = picture
         self.pub_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

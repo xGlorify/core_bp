@@ -1,4 +1,4 @@
-from flask import Flask, g
+from flask import Flask, g, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager, current_user
 from flask.ext.bcrypt import Bcrypt
@@ -35,6 +35,10 @@ def before_request():
 login_manager.login_view = "users.login"
 
 from users.models import User
+
+@app.route('/')
+def global_redirect():
+    return redirect(url_for('assets.viewassets'))
 
 if __name__ == "__main__":
   app.run(host="192.168.168.65", debug = True, threaded = True)

@@ -30,10 +30,13 @@ def submitasset():
                 frame_input = form.frame.data #Form input for Frame of corresponding asset.
                 enclosure_input = form.enclosure.data #Form input for enclosure of corresponding asset.
                 attachments_input = form.attachments.data #Form input for any attachments of corresponding asset.
+                filename = form.img.data.filename
+                picture = 'static/img/' + str(asset_input) + '_' + filename
                 pass_to_db = Motor(asset_input, manufacturer_input, model_number_input, current_input, frequency_input, voltage_input, secondary_voltage_input, 
-                power_factor_input, efficiency_input, horsepower_input, rpm_input, design_input, frame_input, enclosure_input, attachments_input) #Convert form data to Motor model.
+                power_factor_input, efficiency_input, horsepower_input, rpm_input, design_input, frame_input, enclosure_input, attachments_input, picture) #Convert form data to Motor model.
                 db.session.add(pass_to_db) #Add form data in Motor model to database.
                 db.session.commit() #Commit additions to database.
+                form.img.data.save('assets/static/img/' + str(asset_input) + '_' + filename)
                 result_message = str(asset_input) + " successfully added to the database."
             except Exception as e:
                     flash("This asset tag already exists in the database.")
@@ -53,7 +56,7 @@ def delasset():
     db.session.delete(motor)
     db.session.commit()
     flash("Asset %s successfully deleted." % (motor.asset_tag))
-    return redirect(url_for('viewassets'))
+    return redirect(url_for('assets.viewassets'))
     
 @assets_blueprint.route('/viewassets', methods=['GET', 'POST'])
 @login_required
@@ -104,4 +107,9 @@ def search():
             flash("You must enter a value to search.")
     return render_template('searchresults.html')
 
-#@assets_blueprint.route('
+@assets_blueprint.route('/<asset_tag>')
+@login_required
+def asset_profile(asset_tag):
+    asset = Motor.query.filter_by(asset_tag = asset_tag).first_or_404()
+    
+    return render_template('asset_profile.html', asset=asset)

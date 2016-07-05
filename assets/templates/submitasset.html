@@ -4,7 +4,7 @@
     <div class="container">
       <h2>Submit Asset Attributes Below</h2>
       <br>
-      <form action="" method="post" name="submit">
+      <form action="" method="POST" enctype="multipart/form-data">
       {{ form.hidden_tag() }}
       <p>
         {{ form.asset_tag(placeholder=" Enter Asset Tag") }}
@@ -51,6 +51,10 @@
       <p>
          {{ form.attachments(placeholder=" Enter Attachments") }}
      </p>
+     <p>
+         {{ form.img }}
+     </p>
+     
         <input class="btn btn-default" type="submit" value="Submit">
       </form>
       {% if result_message %}

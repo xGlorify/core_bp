@@ -46,7 +46,7 @@
 {% for result in results %}
     <tr>
         <td>
-        <form action="{{ url_for('delasset') }}" method="post">
+        <form action="{{ url_for('assets.delasset') }}" method="post">
         <input type="hidden" name="delete" value="{{ result.asset_tag }}"/>
         <input type="submit" class="btn btn-xs btn-danger" value="Delete"/>
         </form>
