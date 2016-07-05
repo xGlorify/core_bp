@@ -1,0 +1,36 @@
+{% extends "basehead.html" %}
+{% block content %}
+<br>
+
+<body>
+<center>
+    <table style ="width:100%">
+    <tr>
+        <img src="{{ asset.picture }}">
+    </tr>
+
+    <tr>
+            <th>Asset Name</th>
+            <th>Manufacturer</th>
+            <th>Model Number</th>
+            <tr>
+                <td>{{ asset.asset_tag }}</td>
+                <td>{{ asset.manufacturer }}</td>
+                <td>{{ asset.model_number}}</td>
+            </tr>
+            <th>Horsepower</th>
+            <th>Current</th>
+            <th>Frequency</th>
+            <th>Voltage</th>
+            <tr>
+                <td>{{ asset.horsepower }}</td>
+                <td>{{ asset.current }}</td>
+                <td>{{ asset.frequency }}</td>
+                <td>{{ asset.voltage }}</td>
+            </tr>
+    </tr>
+    </table>
+</center>
+</body>
+
+{% endblock %}
