@@ -30,14 +30,22 @@ def submitasset():
                 frame_input = form.frame.data #Form input for Frame of corresponding asset.
                 enclosure_input = form.enclosure.data #Form input for enclosure of corresponding asset.
                 attachments_input = form.attachments.data #Form input for any attachments of corresponding asset.
-                filename = form.img.data.filename
-                picture = 'static/img/' + str(asset_input) + '_' + filename
-                pass_to_db = Motor(asset_input, manufacturer_input, model_number_input, current_input, frequency_input, voltage_input, secondary_voltage_input, 
-                power_factor_input, efficiency_input, horsepower_input, rpm_input, design_input, frame_input, enclosure_input, attachments_input, picture) #Convert form data to Motor model.
-                db.session.add(pass_to_db) #Add form data in Motor model to database.
-                db.session.commit() #Commit additions to database.
-                form.img.data.save('assets/static/img/' + str(asset_input) + '_' + filename)
-                result_message = str(asset_input) + " successfully added to the database."
+                filename = form.picture.data.filename
+                if form.picture.data:
+                    form.picture.data.save('assets/static/img/' + str(asset_input) + '_' + filename)
+                    picture_input = 'static/img/' + str(asset_input) + '_' + filename
+                    pass_to_db = Motor(asset_input, manufacturer_input, model_number_input, current_input, frequency_input, voltage_input, secondary_voltage_input, 
+                    power_factor_input, efficiency_input, horsepower_input, rpm_input, design_input, frame_input, enclosure_input, attachments_input, picture_input) #Convert form data to Motor model.
+                    db.session.add(pass_to_db) #Add form data in Motor model to database.
+                    db.session.commit() #Commit additions to database.
+                    result_message = str(asset_input) + " successfully added to the database with photo."
+                else:
+                    picture_input = 'static/img/NoMotor_Core_No_Photo.png'
+                    pass_to_db = Motor(asset_input, manufacturer_input, model_number_input, current_input, frequency_input, voltage_input, secondary_voltage_input, 
+                    power_factor_input, efficiency_input, horsepower_input, rpm_input, design_input, frame_input, enclosure_input, attachments_input, picture_input)
+                    db.session.add(pass_to_db)
+                    db.session.commit()
+                    result_message = str(asset_input) + " successfully added to the database."
             except Exception as e:
                     flash("This asset tag already exists in the database.")
                     result_message = e #Passes exception errors to e variable for development troubleshooting.

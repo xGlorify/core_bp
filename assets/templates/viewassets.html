@@ -25,6 +25,10 @@
         <input type="hidden" name="delete" value="{{ asset.asset_tag }}"/>
         <input type="submit" class="btn btn-xs btn-danger" value="Delete"/>
         </form>
+        <br>
+        <form action="{{ asset.asset_tag }}" method="get">
+        <input type="submit" class="btn btn-xs btn-info" value="Profile"/>
+        </form>
         </td>
         <td>{{ asset.asset_tag }}</td>
         <td>{{ asset.manufacturer }}</td>

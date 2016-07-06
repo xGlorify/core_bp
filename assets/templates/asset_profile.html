@@ -4,32 +4,90 @@
 
 <body>
 <center>
-    <table style ="width:100%">
-    <tr>
-        <img src="{{ asset.picture }}">
-    </tr>
-
-    <tr>
+    <img src="{{ asset.picture }}" width="408" height="306" hspace = "10" style="float:right;">
+    <div class = "table-responsive">
+    
+        <table class = "table table-bordered" style ="">
+        <tr>
             <th>Asset Name</th>
             <th>Manufacturer</th>
             <th>Model Number</th>
+            <th>Status</th>
             <tr>
                 <td>{{ asset.asset_tag }}</td>
                 <td>{{ asset.manufacturer }}</td>
                 <td>{{ asset.model_number}}</td>
+                <td><strong><font color="green"> LIVE </font></strong></td>
             </tr>
-            <th>Horsepower</th>
-            <th>Current</th>
-            <th>Frequency</th>
+        </tr>
+        </table>
+        
+        <table class = "table table-bordered" style ="">
+        <tr>
+            <th>Current (Amps)</th>
+            <th>Frequency (Hz)</th>
             <th>Voltage</th>
+            <th>Seconday Voltage</th>
             <tr>
-                <td>{{ asset.horsepower }}</td>
                 <td>{{ asset.current }}</td>
                 <td>{{ asset.frequency }}</td>
                 <td>{{ asset.voltage }}</td>
+                <td>{{ asset.secondary_voltage }}</td>
             </tr>
-    </tr>
-    </table>
+        </tr>
+        </table>
+        <table class = "table table-bordered" style ="">
+        <tr>
+            <th>Power Factor</th>
+            <th>Efficiency (%)</th>
+            <th>Horsepower</th>
+            <th>RPM</th>
+            <tr>
+                <td>{{ asset.power_factor }}</td>
+                <td>{{ asset.efficiency }}</td>
+                <td>{{ asset.horsepower }}</td>
+                <td>{{ asset.rpm }}</td>
+            </tr>
+        </tr>
+        </table>
+        
+        <table class = "table table-bordered" style ="">
+        <tr>
+            <th>Design</th>
+            <th>Frame</th>
+            <th>Enclosure</th>
+            <tr>
+                <td>{{ asset.design }}</td>
+                <td>{{ asset.frame }}</td>
+                <td>{{ asset.enclosurer }}</td>
+            </tr>
+        </table>
+    </div>
+        
+        <table class = "table table-bordered" style ="">
+        <tr>
+        <th>Attachments</th>
+        <tr>
+            <td>{{ asset.attachments }}</td>
+        </tr>
+        </table>
+    
+        <table class = "table" style ="">
+        <tr>
+        <th>Task History</th>
+        <tr>
+            <td>{{ asset.attachments }}</td>
+        </tr>
+        </table>
+        
+        <table class = "table" style ="">
+        <tr>
+        <th>Maintenance History</th>
+        <tr>
+            <td>{{ asset.attachments }}</td>
+        </tr>
+        </table>
+    
 </center>
 </body>
 

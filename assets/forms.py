@@ -1,5 +1,5 @@
 from flask.ext.wtf import Form
-from wtforms import StringField, IntegerField, FloatField, FileField
+from wtforms import StringField, IntegerField, FloatField, FileField, SelectField
 from wtforms.validators import DataRequired, Optional
 
 class SubmitAssetForm(Form):
@@ -18,7 +18,9 @@ class SubmitAssetForm(Form):
     frame = StringField('frame', validators=[DataRequired()])
     enclosure = StringField('enclosure', validators=[DataRequired()])
     attachments = StringField('attachments', validators=[Optional()])
-    img = FileField('img', validators=[Optional()])
+    #status_choices = [('1', 'Live'), ('2', 'Stores'), ('3', 'Repair')]
+    #status = SelectField('status', choices = status_choices, validators=[Optional()])
+    picture = FileField('img', validators=[Optional()])
     
 class FilterAssetsForm(Form):
     horsepower_search = IntegerField('horsepower_search', validators=[Optional()])

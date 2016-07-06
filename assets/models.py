@@ -16,11 +16,12 @@ class Motor(db.Model):
     efficiency = db.Column('Efficiency', db.Integer, nullable = False)
     horsepower = db.Column('Horsepower', db.Integer, nullable = False)
     rpm = db.Column('RPM', db.Integer, nullable = False)
-    design = db.Column('Design', db.String(10), nullable = False)
+    design = db.Column('Design', db.String(20), nullable = False)
     frame = db.Column('Frame', db.String(30), nullable = False)
     enclosure = db.Column('Enclosure', db.String(30), nullable = False)
     attachments = db.Column('Attachments', db.String(30))
     picture = db.Column('Picture', db.String(100))
+    #status = db.Column('Status', db.String(50))
     pub_date = db.Column(db.DateTime())
     
     
@@ -43,4 +44,5 @@ class Motor(db.Model):
         self.enclosure = enclosure
         self.attachments = attachments
         self.picture = picture
+        #self.status = status
         self.pub_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
