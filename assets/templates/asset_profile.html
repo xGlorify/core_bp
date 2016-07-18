@@ -4,7 +4,19 @@
 
 <body>
 <center>
-    <img src="{{ asset.picture }}" width="408" height="306" hspace = "10" style="float:right;">
+<div style="float:right;">
+    <img src="{{ asset.picture }}" width="408" height="306" hspace = "10" style="">
+    <br>
+    <div style="display:inline-block;">
+        <form action="/assets/hotspare/{{ asset.asset_tag }}" method = "get" style="display:inline-block;">
+            <input type="submit" class="btn btn-s btn-warning" value="Find Hot Spare" style="margin-top:10px;">
+        </form>
+        <form action="/assets/edit_asset/{{ asset.asset_tag }}" method = "get" style="display:inline-block;">
+            <input type="submit" class="btn btn-s btn-info" value="Edit Asset" style="margin-top:10px;">  
+        </form>
+    </div>
+</div>
+
     <div class = "table-responsive">
     
         <table class = "table table-bordered" style ="">
@@ -17,7 +29,7 @@
                 <td>{{ asset.asset_tag }}</td>
                 <td>{{ asset.manufacturer }}</td>
                 <td>{{ asset.model_number}}</td>
-                <td><strong><font color="green"> LIVE </font></strong></td>
+                <td>{{ asset.status }}</td>
             </tr>
         </tr>
         </table>
@@ -27,7 +39,7 @@
             <th>Current (Amps)</th>
             <th>Frequency (Hz)</th>
             <th>Voltage</th>
-            <th>Seconday Voltage</th>
+            <th>Secondary Voltage</th>
             <tr>
                 <td>{{ asset.current }}</td>
                 <td>{{ asset.frequency }}</td>
@@ -56,12 +68,15 @@
             <th>Design</th>
             <th>Frame</th>
             <th>Enclosure</th>
+            <th>Location</th>
             <tr>
                 <td>{{ asset.design }}</td>
                 <td>{{ asset.frame }}</td>
-                <td>{{ asset.enclosurer }}</td>
+                <td>{{ asset.enclosure }}</td>
+                <td>{{ asset.location }}</td>
             </tr>
         </table>
+        
     </div>
         
         <table class = "table table-bordered" style ="">
@@ -76,7 +91,7 @@
         <tr>
         <th>Task History</th>
         <tr>
-            <td>{{ asset.attachments }}</td>
+            <td> None </td>
         </tr>
         </table>
         
@@ -84,7 +99,7 @@
         <tr>
         <th>Maintenance History</th>
         <tr>
-            <td>{{ asset.attachments }}</td>
+            <td> None </td>
         </tr>
         </table>
     

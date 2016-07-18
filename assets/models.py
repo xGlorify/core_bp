@@ -1,4 +1,4 @@
-from core import db
+from core import db, current_user
 from datetime import datetime
 
 class Motor(db.Model):
@@ -8,26 +8,28 @@ class Motor(db.Model):
     asset_tag = db.Column('Asset Tag', db.String(100), unique=True, primary_key = True, nullable = False)
     manufacturer = db.Column('Manufacturer', db.String(30), nullable = False)
     model_number = db.Column('Model Number', db.String(50), nullable = False)
-    current = db.Column('Current', db.Integer, nullable = False)
-    frequency = db.Column('frequency', db.Integer, nullable = False)
-    voltage = db.Column('Voltage', db.Integer, nullable = False)
+    current = db.Column('Current', db.String, nullable = False)
+    frequency = db.Column('frequency', db.String)
+    voltage = db.Column('Voltage', db.String, nullable = False)
     secondary_voltage = db.Column('Secondary Voltage', db.Numeric)
-    power_factor = db.Column('Power Factor', db.Integer, nullable = False)
-    efficiency = db.Column('Efficiency', db.Integer, nullable = False)
-    horsepower = db.Column('Horsepower', db.Integer, nullable = False)
+    power_factor = db.Column('Power Factor', db.Float)
+    efficiency = db.Column('Efficiency', db.Float)
+    horsepower = db.Column('Horsepower', db.Float, nullable = False)
     rpm = db.Column('RPM', db.Integer, nullable = False)
     design = db.Column('Design', db.String(20), nullable = False)
-    frame = db.Column('Frame', db.String(30), nullable = False)
+    frame = db.Column('Frame', db.String(30))
     enclosure = db.Column('Enclosure', db.String(30), nullable = False)
-    attachments = db.Column('Attachments', db.String(30))
+    attachments = db.Column('Attachments', db.String(200))
+    location = db.Column('Location', db.String(30))
     picture = db.Column('Picture', db.String(100))
-    #status = db.Column('Status', db.String(50))
+    status = db.Column('Status', db.String(50))
+    added_by = db.Column('Added By', db.String(50))
     pub_date = db.Column(db.DateTime())
     
     
     
-    def __init__(self, asset_tag, manufacturer, model_number, current, frequency, voltage, secondary_voltage,
-        power_factor, efficiency, horsepower, rpm, design, frame, enclosure, attachments, picture, pub_date=None):
+    def __init__(self, asset_tag, manufacturer, model_number, current, frequency, voltage, secondary_voltage, power_factor,
+	efficiency, horsepower, rpm, design, frame, enclosure, attachments, location, picture, status, added_by=None, pub_date=None):
         self.asset_tag = asset_tag
         self.manufacturer = manufacturer
         self.model_number = model_number
@@ -43,6 +45,8 @@ class Motor(db.Model):
         self.frame = frame
         self.enclosure = enclosure
         self.attachments = attachments
+        self.location = location
         self.picture = picture
-        #self.status = status
+        self.status = status
+        self.added_by = str(current_user.first_name) + " " + str(current_user.last_name)
         self.pub_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

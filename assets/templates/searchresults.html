@@ -2,23 +2,22 @@
 {% block content %}
 
 <center>
-{% if results %}
 <h3>Search Results</h3>
 <table>
-<th> </th>
+<th></th>
 <th>Asset Tag</th>
 <th>Horsepower</th>
+<th>Current</th>
+<th>Voltage</th>
+{% for result in results %}
     <tr>
         <td>
-        <form action="{{ url_for('assets.delasset') }}" method="post">
-        <input type="hidden" name="delete" value="{{ results.asset_tag }}"/>
-        <input type="submit" class="btn btn-xs btn-danger" value="Delete"/>
-        </form>
-        </td>
-        <td>{{ results.asset_tag }}</td>
-        <td>{{ results.horsepower }}</td>
+        <td>{{ result.asset_tag }}</td>
+        <td>{{ result.horsepower }}</td>
+        <td>{{ result.current }}</td>
+        <td>{{ result.voltage }}</td>
     </tr>
-{% endif %}
+{% endfor %}
 </table>
 </center>
 

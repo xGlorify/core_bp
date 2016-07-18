@@ -4,7 +4,7 @@ from flask.ext.login import LoginManager, current_user
 from flask.ext.bcrypt import Bcrypt
 from assets.forms import SearchAssetTag
 
-app = Flask(__name__)
+app = Flask(__name__ )
 app.config.from_object('config')
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -41,4 +41,4 @@ def global_redirect():
     return redirect(url_for('assets.viewassets'))
 
 if __name__ == "__main__":
-  app.run(host="192.168.168.65", debug = True, threaded = True)
+  app.run(host="192.168.168.66", debug = True, threaded = True)

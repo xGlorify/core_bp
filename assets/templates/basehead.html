@@ -3,19 +3,19 @@
   <head>
     <title>Core Systems - Alpha Release 2016</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ url_for("static", filename="/bootstrap.min.css") }}" rel="stylesheet" media="screen">
+    <link href="{{ url_for("assets.static", filename="bootstrap.min.css") }}" rel="stylesheet" media="screen">
   </head>
   <body>
 
     <div class="container">
     <br>
     <center>
-    <form action="{{ url_for('search') }}" method="post" name="submit">
-    <a href="{{ url_for('submitasset') }}">Submit Asset Page</a>
+    <form action="{{ url_for('assets.search') }}" method="post" name="submit">
+    <a href="{{ url_for('assets.submitasset') }}">Submit Asset Page</a>
     |
-    <a href="{{ url_for('viewassets') }}">View Assets Page</a>
+    <a href="{{ url_for('assets.viewassets') }}">View Assets Page</a>
     |
-    <a href="{{ url_for('searchassets') }}">Filter Assets Page</a>
+    <a href="{{ url_for('assets.searchassets') }}">Filter Assets Page</a>
     |
       {{ g.headersearchform.hidden_tag() }}
         {{ g.headersearchform.asset_tag_search(placeholder=" Enter Asset Tag") }}
@@ -24,7 +24,7 @@
     {{ g.current_user.first_name}}  {{ g.current_user.last_name }}
     {% if g.current_user.first_name %}
     |
-    <a href="{{ url_for('logout') }}">Logout</a>
+    <a href="{{ url_for('users.logout') }}">Logout</a>
     {% endif %}
     </form>
      

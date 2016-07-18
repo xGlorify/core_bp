@@ -7,16 +7,15 @@
 <th>Action</th>
 <th>Asset Tag</th>
 <th>Manufacturer</th>
-<th>Model Number</th>
+<th>Model No.</th>
 <th>Current</th>
-<th>Frequency</th>
 <th>Voltage</th>
-<th>Horsepower</th>
+<th>HP</th>
 <th>RPM</th>
-<th>Design</th>
 <th>Frame</th>
 <th>Enclosure</th>
 <th>Attachments</th>
+<th>Submitted By</th>
 <th>Date Created</th>
 {% for asset in assets %}
     <tr>
@@ -34,14 +33,13 @@
         <td>{{ asset.manufacturer }}</td>
         <td>{{ asset.model_number }}</td>
         <td>{{ asset.current }}</td>
-        <td>{{ asset.frequency }}</td>
         <td>{{ asset.voltage }}</td>
         <td>{{ asset.horsepower }}</td>
         <td>{{ asset.rpm }}</td>
-        <td>{{ asset.design }}</td>
         <td>{{ asset.frame }}</td>
         <td>{{ asset.enclosure }}</td>
         <td>{{ asset.attachments }}</td>
+        <td>{{ asset.added_by }}</td>
         <td>{{ asset.pub_date }}</td>
     </tr>
 {% endfor %}
