@@ -6,6 +6,7 @@ class Motor(db.Model):
     __tablename__ = 'Motor'
     #Define Motor table variables. Asset tag is primary_key.
     asset_tag = db.Column('Asset Tag', db.String(100), unique=True, primary_key = True, nullable = False)
+    serial = db.Column('Serial', db.String(100))
     manufacturer = db.Column('Manufacturer', db.String(30), nullable = False)
     model_number = db.Column('Model Number', db.String(50), nullable = False)
     current = db.Column('Current', db.String, nullable = False)
@@ -28,9 +29,10 @@ class Motor(db.Model):
     
     
     
-    def __init__(self, asset_tag, manufacturer, model_number, current, frequency, voltage, secondary_voltage, power_factor,
+    def __init__(self, asset_tag, serial, manufacturer, model_number, current, frequency, voltage, secondary_voltage, power_factor,
 	efficiency, horsepower, rpm, design, frame, enclosure, attachments, location, picture, status, added_by=None, pub_date=None):
         self.asset_tag = asset_tag
+        self.serial = serial
         self.manufacturer = manufacturer
         self.model_number = model_number
         self.current = current

@@ -24,11 +24,13 @@
             <th>Asset Name</th>
             <th>Manufacturer</th>
             <th>Model Number</th>
+            <th>Serial Number</th>
             <th>Status</th>
             <tr>
                 <td>{{ asset.asset_tag }}</td>
                 <td>{{ asset.manufacturer }}</td>
                 <td>{{ asset.model_number}}</td>
+                <td>{{ asset.serial }}</td>
                 <td>{{ asset.status }}</td>
             </tr>
         </tr>
@@ -39,12 +41,18 @@
             <th>Current (Amps)</th>
             <th>Frequency (Hz)</th>
             <th>Voltage</th>
-            <th>Secondary Voltage</th>
+            {% if asset.secondary_voltage %}
+           <th>Secondary Voltage</th>
+            {% else %}
+            {% endif %}
             <tr>
                 <td>{{ asset.current }}</td>
                 <td>{{ asset.frequency }}</td>
                 <td>{{ asset.voltage }}</td>
+                {% if asset.secondary_voltage %}
                 <td>{{ asset.secondary_voltage }}</td>
+                {% else %}
+                {% endif %}
             </tr>
         </tr>
         </table>

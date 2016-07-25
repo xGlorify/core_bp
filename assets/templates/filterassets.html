@@ -7,64 +7,101 @@
       <form action="" method="post" name="submit">
       {{ form.hidden_tag() }}
      <p>
-        {{ form.horsepower_search(placeholder=" Enter Horsepower") }}
+        {{ form.asset_tag_search(placeholder=" Enter Asset Tag") }}
+     </p>
+    <p>
+        {{ form.serial_search(placeholder=" Enter Serial") }}
      </p>
      <p>
-        {{ form.voltage_search(placeholder=" Enter Voltage") }}
+        {{ form.manufacturer_search(placeholder=" Enter Manufacturer") }}
+     </p>
+     <p>
+        {{ form.model_number_search(placeholder=" Enter Model No.") }}
      </p>
      <p>
         {{ form.current_search(placeholder=" Enter Current") }}
      </p>
      <p>
-        {{ form.rpm_search(placeholder=" Enter RPM") }}
+       Frequency: {{ form.frequency_search }}
      </p>
      <p>
-        {{ form.frame_search(placeholder=" Enter Frame Type") }}
-     </p>
-     <p>
-        {{ form.enclosure_search(placeholder=" Enter Enclosure Type") }}
+       Voltage: {{ form.voltage_search }}
      </p>
      <p>
         {{ form.secondary_voltage_search(placeholder=" Enter Secondary Voltage") }}
      </p>
      <p>
-        {{ form.attachments_search(placeholder=" Enter Attachments") }}
+        {{ form.power_factor_search(placeholder=" Enter Power Factor") }}
+     </p>
+     <p>
+        {{ form.efficiency_search(placeholder=" Enter Efficiency") }}
+     </p>
+     <p>
+        {{ form.horsepower_search(placeholder=" Enter HP") }}
+     </p>
+     <p>
+        {{ form.rpm_search(placeholder=" Enter RPM") }}
+     </p>
+     <p>
+        Design: {{ form.design_search }}
+     </p>
+     <p>
+        {{ form.frame_search(placeholder=" Enter Frame Type") }}
+     </p>
+     <p>
+        Enclosure: {{ form.enclosure_search }}
+     </p>
+     <p>
+        {{ form.location_search(placeholder=" Enter Location") }}
+     </p>
+     <p>
+        Status: {{ form.status_search }}
      </p>
         <input class="btn btn-default" type="submit" value="Search">
       </form>
+
 <br>
-<table>
-<th> </th>
-{% if results %}
+</br>
+{% if assets %}
+<table class="table table-striped table-bordered">
+<th>Action</th>
 <th>Asset Tag</th>
-<th>Horsepower</th>
+<th>Manufacturer</th>
+<th>Model No.</th>
 <th>Voltage</th>
+<th>HP</th>
 <th>RPM</th>
 <th>Frame</th>
-<th>Enclosure</th>
-<th>Secondary Voltage</th>
 <th>Attachments</th>
+<th>Location</th>
+<th>Submitted By</th>
 <th>Date Created</th>
 {% endif %}
-{% for result in results %}
+{% for asset in assets %}
     <tr>
         <td>
         <form action="{{ url_for('assets.delasset') }}" method="post">
-        <input type="hidden" name="delete" value="{{ result.asset_tag }}"/>
+        <input type="hidden" name="delete" value="{{ asset.asset_tag }}"/>
         <input type="submit" class="btn btn-xs btn-danger" value="Delete"/>
         </form>
+        <br>
+        <form action="{{ asset.asset_tag }}" method="get">
+        <input type="submit" class="btn btn-xs btn-info" value="Profile"/>
+        </form>
         </td>
-        <td>{{ result.asset_tag }}</td>
-        <td>{{ result.horsepower }}</td>
-        <td>{{ result.voltage }}</td>
-        <td>{{ result.rpm }}</td>
-        <td>{{ result.frame }}</td>
-        <td>{{ result.enclosure }}</td>
-        <td>{{ result.secondary_voltage }}</td>
-        <td>{{ result.attachments }}</td>
-        <td>{{ result.pub_date }}</td>
-{% endfor %}
+        <td>{{ asset.asset_tag }}</td>
+        <td>{{ asset.manufacturer }}</td>
+        <td>{{ asset.model_number }}</td>
+        <td>{{ asset.voltage }}</td>
+        <td>{{ asset.horsepower }}</td>
+        <td>{{ asset.rpm }}</td>
+        <td>{{ asset.frame }}</td>
+        <td>{{ asset.attachments }}</td>
+        <td>{{ asset.location }}</td>
+        <td>{{ asset.added_by }}</td>
+        <td>{{ asset.pub_date }}</td>
     </tr>
+{% endfor %}
 </table>
 </center>
 
