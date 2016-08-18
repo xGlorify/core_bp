@@ -4,6 +4,7 @@ from sqlalchemy.exc import IntegrityError
 from forms import SubmitAssetForm, FilterAssetsForm, EditAssetForm
 from flask.ext.login import login_required
 from models import *
+from tasks.models import *
 
 assets_blueprint = Blueprint('assets', __name__, template_folder = 'templates', static_folder='./static')
 

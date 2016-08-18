@@ -14,9 +14,11 @@ db = SQLAlchemy(app)
 
 from users.views import users_blueprint
 from assets.views import assets_blueprint
+from tasks.views import tasks_blueprint
 
 app.register_blueprint(users_blueprint)
 app.register_blueprint(assets_blueprint,  url_prefix = '/assets')
+app.register_blueprint(tasks_blueprint,  url_prefix = '/tasks')
 
 #db.drop_all()
 #db.create_all()
@@ -41,4 +43,4 @@ def global_redirect():
     return redirect(url_for('assets.viewassets'))
 
 if __name__ == "__main__":
-  app.run(host="192.168.168.66", debug = True, threaded = True)
+  app.run(host="192.168.168.65", debug = True, threaded = True)

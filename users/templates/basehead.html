@@ -17,6 +17,10 @@
     |
     <a href="{{ url_for('assets.searchassets') }}">Filter Assets Page</a>
     |
+    <a href="{{ url_for('tasks.create_tasks') }}">Create Tasks</a>
+    |
+    <a href="{{ url_for('tasks.assign_tasks') }}">Assign Tasks</a>
+    |
       {{ g.headersearchform.hidden_tag() }}
         {{ g.headersearchform.asset_tag_search(placeholder=" Enter Asset Tag") }}
         <input class="btn btn-default" type="submit" value="Search">

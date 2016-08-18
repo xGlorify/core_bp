@@ -98,9 +98,10 @@
         <table class = "table" style ="">
         <tr>
         <th>Task History</th>
-        <tr>
-            <td> None </td>
-        </tr>
+        <tr>{% for i in asset.tasks %}
+		<td> {{ i.task_title }} </td>
+		<td> {{ i.description }} </td>
+        </tr>{% endfor %}
         </table>
         
         <table class = "table" style ="">

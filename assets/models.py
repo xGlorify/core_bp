@@ -1,11 +1,12 @@
 from core import db, current_user
 from datetime import datetime
+from tasks.models import Tasks, link_table
 
 class Motor(db.Model):
     #Define Motor table name.
-    __tablename__ = 'Motor'
     #Define Motor table variables. Asset tag is primary_key.
-    asset_tag = db.Column('Asset Tag', db.String(100), unique=True, primary_key = True, nullable = False)
+    id = db.Column('id', db.Integer, primary_key=True)
+    asset_tag = db.Column('Asset Tag', db.String(100), unique=True, nullable = False)
     serial = db.Column('Serial', db.String(100))
     manufacturer = db.Column('Manufacturer', db.String(30), nullable = False)
     model_number = db.Column('Model Number', db.String(50), nullable = False)
@@ -24,10 +25,9 @@ class Motor(db.Model):
     location = db.Column('Location', db.String(30))
     picture = db.Column('Picture', db.String(100))
     status = db.Column('Status', db.String(50))
+    tasks = db.relationship('Tasks', secondary = link_table, backref = db.backref('asset_tasks'), lazy = 'dynamic')
     added_by = db.Column('Added By', db.String(50))
     pub_date = db.Column(db.DateTime())
-    
-    
     
     def __init__(self, asset_tag, serial, manufacturer, model_number, current, frequency, voltage, secondary_voltage, power_factor,
 	efficiency, horsepower, rpm, design, frame, enclosure, attachments, location, picture, status, added_by=None, pub_date=None):
@@ -50,5 +50,6 @@ class Motor(db.Model):
         self.location = location
         self.picture = picture
         self.status = status
+        #self.tasks = tasks
         self.added_by = str(current_user.first_name) + " " + str(current_user.last_name)
         self.pub_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
