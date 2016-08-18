@@ -1,0 +1,24 @@
+{% extends "basehead.html" %}
+{% block content %}
+  <center>
+    <div class="container">
+      <h2>Assign Tasks Below</h2>
+      <br>
+      <form action="" method="post" name="submit">
+      {{ form.hidden_tag() }}
+     <p>
+        {{ form.asset_tag(placeholder=" Enter Asset Tag") }}
+     </p>
+     <p>
+         {{ form.task_title }}
+     </p>
+        <input class="btn btn-default" type="submit" value="Submit">
+      </form>
+    </div>
+    {% if result_message %}
+    <br>
+       <p class="result_message"> {{ result_message }} </p>
+    </br>
+    {% endif %}
+    </center>
+{% endblock %}
