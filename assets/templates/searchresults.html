@@ -9,7 +9,8 @@
 <th>Horsepower</th>
 <th>Current</th>
 <th>Voltage</th>
-{% if asset %}
+{% if results %}
+{% for result in results %}
     <tr>
         <td>
 	        <td>{{ result.asset_tag }}</td>
@@ -18,6 +19,7 @@
 	        <td>{{ result.voltage }}</td>
     </tr>
 {% endfor %}
+{% endif %}
 </table>
 </center>
 

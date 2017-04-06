@@ -98,10 +98,18 @@
         <table class = "table" style ="">
         <tr>
         <th>Task History</th>
-        <tr>{% for i in asset.tasks %}
+        <tr>{% for i in asset.asset_tasks %}
 		<td> {{ i.task_title }} </td>
 		<td> {{ i.description }} </td>
-        </tr>{% endfor %}
+		<td> {{ i.user }} </td>
+		<td> {{ i.date }} </td>
+		{% if i.reports %}
+		<td><a href = "{{ i.reports }}"><input type="button" class="btn btn-xs btn-default" value="Report"</a></td>
+		{% endif %}
+        <td><a href = "{{ url_for('tasks.task_profile', task_id = i.task_id) }}"><input type="button" class="btn btn-xs btn-default" value="Details"</a></td>
+        </tr>
+        {% endfor %}
+
         </table>
         
         <table class = "table" style ="">

@@ -1,6 +1,6 @@
 from core import db, current_user
 from datetime import datetime
-from tasks.models import Tasks, link_table
+from tasks.models import link_table
 
 class Motor(db.Model):
     #Define Motor table name.
@@ -25,7 +25,6 @@ class Motor(db.Model):
     location = db.Column('Location', db.String(30))
     picture = db.Column('Picture', db.String(100))
     status = db.Column('Status', db.String(50))
-    tasks = db.relationship('Tasks', secondary = link_table, backref = db.backref('asset_tasks'), lazy = 'dynamic')
     added_by = db.Column('Added By', db.String(50))
     pub_date = db.Column(db.DateTime())
     
@@ -50,6 +49,5 @@ class Motor(db.Model):
         self.location = location
         self.picture = picture
         self.status = status
-        #self.tasks = tasks
         self.added_by = str(current_user.first_name) + " " + str(current_user.last_name)
         self.pub_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

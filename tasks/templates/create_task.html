@@ -4,13 +4,19 @@
     <div class="container">
       <h2>Create Tasks Below</h2>
       <br>
-      <form action="" method="post" name="submit">
+      <form action="" method="post" name="submit" enctype="multipart/form-data">
       {{ form.hidden_tag() }}
+     <p>
+        {{ form.asset_tag(placeholder=" Enter Asset Tag") }}
+     </p>
      <p>
         {{ form.task_title(placeholder=" Enter A Name For The Task") }}
      </p>
      <p>
          {{ form.description(placeholder=" Enter A Description") }}
+     </p>
+     <p>
+         {{ form.report }}
      </p>
         <input class="btn btn-default" type="submit" value="Submit">
       </form>

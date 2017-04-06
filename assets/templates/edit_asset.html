@@ -1,0 +1,156 @@
+  <head>
+    <title>Core Systems - Alpha Release 2016</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for("assets.static", filename="bootstrap.min.css") }}" rel="stylesheet" media="screen">
+  </head>
+  <body>
+
+    <div class="container">
+    <br>
+    <center>
+    <form action="{{ url_for('assets.search') }}" method="post" name="submit">
+    <a href="{{ url_for('assets.submitasset') }}">Submit Asset Page</a>
+    |
+    <a href="{{ url_for('assets.viewassets') }}">View Assets Page</a>
+    |
+    <a href="{{ url_for('assets.searchassets') }}">Filter Assets Page</a>
+    |
+      {{ g.headersearchform.hidden_tag() }}
+        {{ g.headersearchform.asset_tag_search(placeholder=" Enter Asset Tag") }}
+        <input class="btn btn-default" type="submit" value="Search">
+    |
+    {{ g.current_user.first_name}}  {{ g.current_user.last_name }}
+    {% if g.current_user.first_name %}
+    |
+    <a href="{{ url_for('users.logout') }}">Logout</a>
+    {% endif %}
+    </form>
+     
+    </center>
+
+<body>
+<center>
+<div style="float:right;">
+    <img src="{{ asset.picture }}" width="408" height="306" hspace = "10" style="">
+    <br>
+    <div style="display:inline-block;">
+        <form action="/assets/hotspare/{{ asset.asset_tag }}" method = "get" style="display:inline-block;">
+            <input type="submit" class="btn btn-s btn-warning" value="Find Hot Spare" style="margin-top:10px;">
+        </form>
+        <form action="{{ url_for('assets.edit_asset', asset_tag=asset.asset_tag) }}" method = "POST" style="display:inline-block;">
+            <input type="submit" class="btn btn-s btn-info" value="Save Changes" style="margin-top:10px;">  
+    </div>
+</div>
+      {{ form.hidden_tag() }}
+    <div class = "table-responsive">
+    
+        <table class = "table table-bordered" style ="">
+        <tr>
+            <th>Asset Name</th>
+            <th>Manufacturer</th>
+            <th>Model Number</th>
+            <th>Serial Number</th>
+            <th>Status</th>
+            <tr>
+                <td>{{ form.asset_tag }}</td>
+                <td>{{ form.manufacturer }}</td>
+                <td>{{ form.model_number }}</td>
+                <td>{{ form.serial }}</td>
+                <td>{{ form.status }}</td>
+            </tr>
+        </tr>
+        </table>
+        
+        <table class = "table table-bordered" style ="">
+        <tr>
+            <th>Current (Amps)</th>
+            <th>Frequency (Hz)</th>
+            <th>Voltage</th>
+            <th>Secondary Voltage</th>
+            <tr>
+                <td>{{ form.current }}</td>
+                <td>{{ form.frequency }}</td>
+                <td>{{ form.voltage }}</td>
+                <td>{{ form.secondary_voltage }}</td>
+            </tr>
+        </tr>
+        </table>
+        <table class = "table table-bordered" style ="">
+        <tr>
+            <th>Power Factor</th>
+            <th>Efficiency (%)</th>
+            <th>Horsepower</th>
+            <th>RPM</th>
+            <tr>
+                <td>{{ form.power_factor }}</td>
+                <td>{{ form.efficiency }}</td>
+                <td>{{ form.horsepower }}</td>
+                <td>{{ form.rpm }}</td>
+            </tr>
+        </tr>
+        </table>
+        
+        <table class = "table table-bordered" style ="">
+        <tr>
+            <th>Design</th>
+            <th>Frame</th>
+            <th>Enclosure</th>
+            <th>Location</th>
+            <tr>
+                <td>{{ form.design }}</td>
+                <td>{{ form.frame }}</td>
+                <td>{{ form.enclosure }}</td>
+                <td>{{ form.location }}</td>
+            </tr>
+        </table>
+        
+    </div>
+        
+        <table class = "table table-bordered" style ="">
+        <tr>
+        <th>Attachments</th>
+        <tr>
+            <td>{{ form.attachments }}</td>
+        </tr>
+        </table>
+    
+        <table class = "table" style ="">
+        <tr>
+        <th>Task History</th>
+        <tr>
+            <td> None </td>
+        </tr>
+        </table>
+        
+        <table class = "table" style ="">
+        <tr>
+        <th>Maintenance History</th>
+        <tr>
+            <td> None </td>
+        </tr>
+        </table>
+    </form>
+</center>
+</body>
+
+     <br>
+    </div>
+    <div class="container">
+    <center>
+    {% if form.errors %}
+        {{ form.errors }}
+    {% endif %}
+
+    {% for message in get_flashed_messages() %}
+        {{ message }}
+    {% endfor %}
+
+          {% if result_message %}
+      <br>
+        <p class="result_message"> {{ result_message }} </p>
+      </br>
+      {% endif %}
+    </center>
+    </div>
+  </body>
+<br>

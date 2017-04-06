@@ -54,7 +54,6 @@ def submitasset():
                     flash("This asset tag already exists in the database.")
                     result_message = e #Passes exception errors to e variable for development troubleshooting.
                     db.session.rollback() #Rolls back added / committed changes.
-
         else:
             result_message = "You must enter a value for all fields and only numbers for the Horsepower, Voltage, RPM and Secondary Voltage fields." # If a field is empty or missing data.
         return render_template('submitasset.html', result_message=result_message, form=form)
@@ -144,7 +143,8 @@ def hotspare_search(asset_tag):
     current = asset.current
     voltage = asset.voltage
     horsepower = asset.horsepower
-    filter_data = {'horsepower' : horsepower, 'frequency' : frequency, 'current' : current, 'voltage' : voltage}
+    frame = asset.frame
+    filter_data = {'frame' : frame, 'horsepower' : horsepower, 'frequency' : frequency, 'current' : current, 'voltage' : voltage}
     results = Motor.query.filter_by(**filter_data).all()
     return render_template('searchresults.html', results=results)
 
