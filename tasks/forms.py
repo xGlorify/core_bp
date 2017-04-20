@@ -8,6 +8,7 @@ class CreateTasksForm(Form):
 	task_title = SelectField('task_title', choices=[('Shaft Rotation', 'Shaft Rotation'), ('Vibration Analysis', 'Vibration Analysis')], validators=[DataRequired()])
 	description = TextField('description', validators=[DataRequired()])
 	report = FileField('report', validators=[Optional()])
+	status = SelectField('status', choices=[('Pending', 'Pending'), ('Complete', 'Complete')], validators=[DataRequired()])
 
 #class AssignTasksForm(Form):
 #    asset_tag = StringField('asset_tag', validators=[DataRequired()])

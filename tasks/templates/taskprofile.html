@@ -8,15 +8,24 @@
     
         <table class = "table table-bordered" style ="">
         <tr>
+            <th>Action</th>
             <th>Task Title</th>
+            <th>Status</th>
             <th>Description</th>
-	     <th>Date</th>
+	        <th>Date</th>
             <th>User</th>
             <th>Attachment</th>
             <tr>
+                <td>
+                <form action="{{ url_for('tasks.deltask') }}" method="post">
+                <input type="hidden" name="delete" value="{{ task.task_id }}"/>
+                <input type="submit" class="btn btn-xs btn-danger" value="Delete"/>
+                </form>
+                </td>
                 <td>{{ task.task_title }}</td>
+                <td>{{ task.status }}</td>
                 <td>{{ task.description }}</td>
-		  <td>{{ task.date}}</td>
+		        <td>{{ task.date}}</td>
                 <td>{{ task.user}}</td>
 		{% if task.reports %}
 		<td><input type="button" class="btn btn-xs btn-default" value="Report" onclick="location.href = '{{ task.reports }}'"></td>

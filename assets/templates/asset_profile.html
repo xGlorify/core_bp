@@ -87,6 +87,7 @@
         
     </div>
         
+        {% if asset.attachments %}
         <table class = "table table-bordered" style ="">
         <tr>
         <th>Attachments</th>
@@ -94,12 +95,20 @@
             <td>{{ asset.attachments }}</td>
         </tr>
         </table>
+        {% endif %}
     
         <table class = "table" style ="">
         <tr>
         <th>Task History</th>
-        <tr>{% for i in asset.asset_tasks %}
+        <th>Status</th>
+        <th>Description</th>
+        <th>User</th>
+        <th>Date Submitted</th>
+        <th>Reports</th>
+        <th>Details</th>
+        <tr>{% for i in asset.asset_tasks[-5:] %}
 		<td> {{ i.task_title }} </td>
+        <td> {{ i.status }} </td>
 		<td> {{ i.description }} </td>
 		<td> {{ i.user }} </td>
 		<td> {{ i.date }} </td>
@@ -109,9 +118,12 @@
         <td><a href = "{{ url_for('tasks.task_profile', task_id = i.task_id) }}"><input type="button" class="btn btn-xs btn-default" value="Details"</a></td>
         </tr>
         {% endfor %}
-
         </table>
-        
+
+        <div style="float:right; margin-bottom:10px; margin-right:30px;">
+        <a href = "{{ url_for('tasks.all_asset_tasks', asset_tag = asset.asset_tag) }}"> <input type="button" class="btn btn-xs btn-info" value="View All Tasks >"></a>
+        </div>
+
         <table class = "table" style ="">
         <tr>
         <th>Maintenance History</th>

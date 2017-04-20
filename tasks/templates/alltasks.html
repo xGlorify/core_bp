@@ -1,0 +1,69 @@
+{% extends "basehead.html" %}
+{% block content %}
+<br>
+
+<body>
+<center>
+    <div class = "table-responsive">
+    <h2>{{ asset.asset_tag }} - Full Task History</h2>
+    
+        <h3>Open Tasks</h3>
+        <table class = "table" style ="">
+        <tr>
+        <td>
+        <th>Task Type</th>
+        <th>Status</th>
+        {% for i in asset.asset_tasks %}
+        <tr>{% if i.status == 'Pending' %}
+        <td>
+        <form action="{{ url_for('tasks.deltask') }}" method="post">
+        <input type="hidden" name="delete" value="{{ i.task_id }}"/>
+        <input type="submit" class="btn btn-xs btn-danger" value="Delete"/>
+        </form>
+        <td> {{ i.task_title }} </td>
+        <td> {{ i.status }} </td>
+        <td> {{ i.description }} </td>
+        <td> {{ i.user }} </td>
+        <td> {{ i.date }} </td>
+        {% if i.reports %}
+        <td><a href = "{{ i.reports }}"><input type="button" class="btn btn-xs btn-default" value="Report"</a></td>
+        {% endif %}
+        <td><a href = "{{ url_for('tasks.task_profile', task_id = i.task_id) }}"><input type="button" class="btn btn-xs btn-default" value="Details"</a></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        </table>
+
+<br>
+        <h3>Completed Tasks</h3>
+        <table class = "table" style ="">
+        <tr>
+        <td>
+        <th>Task Type</th>
+        <th>Status</th>
+        {% for i in asset.asset_tasks %}
+        <tr>{% if i.status == 'Complete' %}
+        <td>
+        <form action="{{ url_for('tasks.deltask') }}" method="post">
+        <input type="hidden" name="delete" value="{{ i.task_id }}"/>
+        <input type="submit" class="btn btn-xs btn-danger" value="Delete"/>
+        </form>
+        <td> {{ i.task_title }} </td>
+        <td> {{ i.status }} </td>
+        <td> {{ i.description }} </td>
+        <td> {{ i.user }} </td>
+        <td> {{ i.date }} </td>
+        {% if i.reports %}
+        <td><a href = "{{ i.reports }}"><input type="button" class="btn btn-xs btn-default" value="Report"</a></td>
+        {% endif %}
+        <td><a href = "{{ url_for('tasks.task_profile', task_id = i.task_id) }}"><input type="button" class="btn btn-xs btn-default" value="Details"</a></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        </table>
+
+
+</center>
+</body>
+
+{% endblock %}

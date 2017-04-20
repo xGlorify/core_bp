@@ -20,10 +20,11 @@ def create_tasks():
 				title_input = form.task_title.data
 				description_input = form.description.data
 				filename = form.report.data.filename
+				status_input = form.status.data
 				if form.report.data:
 					form.report.data.save('assets/static/reports/' + str(asset_tag) + '_' + filename)
 					report_input = '/assets/static/reports/' + str(asset_tag) + '_' + filename
-					task = Task(title_input, description_input, report_input)
+					task = Task(title_input, description_input, report_input, status_input)
 					asset.asset_tasks.append(task)
 					current_user.user_tasks.append(task)
 					db.session.add(task)
@@ -31,7 +32,7 @@ def create_tasks():
 					flash('Task successfully assigned with report attached.')
 				else:
 					report_input = None
-					task = Task(title_input, description_input, report_input)
+					task = Task(title_input, description_input, report_input, status_input)
 					asset.asset_tasks.append(task)
 					current_user.user_tasks.append(task)
 					db.session.add(task)
@@ -47,3 +48,18 @@ def create_tasks():
 def task_profile(task_id):
 	task = Task.query.filter_by(task_id = task_id).first_or_404()
 	return render_template('taskprofile.html', task=task)
+
+@tasks_blueprint.route('/viewall/<asset_tag>')
+@login_required
+def all_asset_tasks(asset_tag):
+	asset = Motor.query.filter_by(asset_tag = asset_tag).first_or_404()
+	return render_template('alltasks.html', asset = asset)
+
+@tasks_blueprint.route('/deltask', methods=['GET', 'POST'])
+@login_required
+def deltask():
+    task = Task.query.filter_by(task_id=request.form["delete"]).first_or_404()
+    db.session.delete(task)
+    db.session.commit()
+    flash("Task %s successfully deleted." % (task.task_title))
+    return redirect(url_for('assets.viewassets'))
